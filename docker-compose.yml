@@ -1,27 +1,19 @@
 version: '2.1'
 services:
   db:
-    image: 'postgres:13.7-alpine'
-    restart: always
+    image: 'postgres:13'
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=password
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 3s
-      timeout: 5s
-      retries: 5
+      - POSTGRES_DB=aluraflix
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     networks:
       - simple_network
   app:
     build: .
-    restart: always
-    depends_on:
-      db:
-        condition: service_healthy
     environment:
-      - DB_USER=root
-      - DB_PASSWORD=password
+      - DB_NAME=aluraflix
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
       - DB_HOST=db
       - DB_PORT=5432
       - DJANGO_SUPERUSER_EMAIL=admin@example.com
@@ -31,6 +23,8 @@ services:
       - 8000:80
     networks:
       - simple_network
+    depends_on:
+      - db
 
 networks:
   simple_network:
