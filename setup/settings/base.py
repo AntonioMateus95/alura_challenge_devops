@@ -1,7 +1,7 @@
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -13,7 +13,7 @@ SECRET_KEY = '_&#6!!_&e!b*2y*woaoqy!g=z+en8)%3_g9(z&@cm4_&h#7wis'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = (os.environ.get('ALLOWED_HOSTS') and os.environ.get('ALLOWED_HOSTS').split(',')) or []
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -66,12 +66,8 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT', '5432')
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'aluraflix'
     }
 }
 
