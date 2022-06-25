@@ -13,22 +13,8 @@ env:
   CONTAINER_NAME: aluraflix
 
 jobs:
-  wait-ci:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Wait for ci to be succeded
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-ci
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: ci-workflow
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - name: Exit with a failing build
-        if: steps.wait-for-ci.outputs.conclusion != 'success'
-        run: exit 1
   deploy:
     runs-on: ubuntu-latest
-    needs: wait-ci
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
