@@ -24,3 +24,8 @@ jobs:
       - name: Run tests
         run: |
           python manage.py test
+  ci-workflow:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - run: exit 0
